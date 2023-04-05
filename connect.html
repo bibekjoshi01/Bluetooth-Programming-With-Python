@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Bluetooth Device Info</title>
+  </head>
+  <body>
+    <button id="connectButton">Connect</button>
+  </body>
+  <script type="text/javascript">
+    // get the button element
+    const connectButton = document.getElementById("connectButton");
+
+    // add a click event listener to the button
+    connectButton.addEventListener("click", async () => {
+      try {
+        // request a Bluetooth device
+        const device = await navigator.bluetooth.requestDevice({
+          filters: [{ services: ["battery_service"] }],
+        });
+
+        console.log(`Device name: ${device.name}`);
+      } catch (error) {
+        console.log(`Error: ${error}`);
+      }
+    });
+  </script>
+</html>
